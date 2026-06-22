@@ -1,0 +1,9 @@
+www.is.kyusan-u.ac.jp/~toshiにhttpで接続
+
+
+分解
+http
+://
+www.is.kyusan-u.ac.jp
+/~toshi/
+<schema>://<host>/<path>
