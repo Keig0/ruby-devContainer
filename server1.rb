@@ -4,17 +4,30 @@
 require 'socket'
 
 def server s
-  cmd, path, ver = s
-if path == "/"
-  pp "INDEX"
-  s.puts "index"
-else
-  pp "OTHER"
-  s.puts "other"
-end
-s.close
-end
+  cmd,path,ver = s.gets.split
+  # HTTP/1.0として正しく返答
+  # 1行目 HTTP/1.0 200 OK
+  # 2行目 Content-Type: text/html
+  # 3行目 空行
+  # 4行目 コンテンツ
+  # 最後　ソケットをクローズ
+  
+# 7/13の予定
+# http://localhost/server1.rb
+# へのアクセスでファイルの内容を表示したい
 
+  if path == "/"
+    s.print "HTTP/1.0 200 OK\r\n"
+    s.print "Content-Type: text/plain\r\n"
+    s.print "\r\n"
+    pp"INDEX"
+    s.puts "index"
+  else
+    pp "OTHER"
+    s.puts "other"
+  end
+  s.close
+end
 gs = TCPServer.open 'http'
 # loop do　こっちも無限ループ
 while true
