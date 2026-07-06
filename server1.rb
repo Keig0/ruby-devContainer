@@ -4,12 +4,15 @@
 require 'socket'
 
 def server s
-  while line=s.gets
-    pp line
-    s.puts line
-    break if line == "\r\n"
-  end
-  s.close
+  cmd, path, ver = s
+if path == "/"
+  pp "INDEX"
+  s.puts "index"
+else
+  pp "OTHER"
+  s.puts "other"
+end
+s.close
 end
 
 gs = TCPServer.open 'http'
